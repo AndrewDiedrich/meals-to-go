@@ -1,54 +1,53 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
-import { resturantRequest } from "./resturantRequest";
+import { restaurantRequest } from "./restaurantRequest";
 import { LocationContext } from "../location/location.context";
 
-export interface ResturantContextType {
-  resturants: any;
+export interface RestaurantContextType {
+  restaurants: any;
   isLoading: boolean;
   error: any;
 }
-export const ResturantContext = createContext({
-  resturants: [],
+export const RestaurantContext = createContext({
+  restaurants: [],
   isLoading: false,
   error: null,
 });
 
-export const ResturantsContextProvider = ({ children }: { children: any }) => {
-  const [resturants, setResturants] = useState([]);
+export const RestaurantsContextProvider = ({ children }: { children: any }) => {
+  const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const { location } = useContext(LocationContext);
 
-  const retrieveResturants = (locationString: string) => {
+  const retrieveRestaurants = (locationString: string) => {
     setIsLoading(true);
     setTimeout(async () => {
-      const { data, requestError } = await resturantRequest(locationString);
+      const { data, requestError } = await restaurantRequest(locationString);
       if (requestError) {
         setIsLoading(false);
         setError(requestError);
       } else {
         setIsLoading(false);
-        setResturants(data);
+        setRestaurants(data);
       }
     }, 2000);
   };
   useEffect(() => {
     if (location) {
       const locationString = `${location.lat},${location.lng}`;
-      retrieveResturants(locationString);
-      console.log("location string", locationString);
+      retrieveRestaurants(locationString);
     }
   }, [location]);
   return (
-    <ResturantContext.Provider
+    <RestaurantContext.Provider
       value={{
-        resturants,
+        restaurants,
         isLoading,
         error,
       }}
     >
       {children}
-    </ResturantContext.Provider>
+    </RestaurantContext.Provider>
   );
 };

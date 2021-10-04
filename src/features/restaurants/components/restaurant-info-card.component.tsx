@@ -2,14 +2,14 @@ import React from "react";
 import { View } from "react-native";
 import {
   Rating,
-  ResturnatCard,
-  ResturnatCardCover,
+  RestaurnatCard,
+  RestaurnatCardCover,
   Info,
   Icon,
   SectionEnd,
   Row,
   Address,
-} from "./resturnat-info-card.styles";
+} from "./restaurnat-info-card.styles";
 import {
   Spacer,
   Sizes,
@@ -29,16 +29,25 @@ interface Resturant {
   isOpen: boolean;
   rating: number;
   isClosedTemporarily: boolean;
+  placeId: string;
 }
 
-export const ResturantCard = ({ resturant }: { resturant: Resturant }) => {
-  const { name, icon, photos, vicinity, isOpen, rating, isClosedTemporarily } =
-    resturant;
+export const RestaurantCard = ({ restaurant }: { restaurant: Resturant }) => {
+  const {
+    name,
+    icon,
+    photos,
+    vicinity,
+    isOpen,
+    rating,
+    isClosedTemporarily,
+    placeId,
+  } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
-    <ResturnatCard elevation={5}>
-      <ResturnatCardCover key={resturant.name} source={{ uri: photos[0] }} />
+    <RestaurnatCard elevation={5}>
+      <RestaurnatCardCover key={restaurant.name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant={Varient.LABEL}>{name}</Text>
         <Row>
@@ -46,7 +55,7 @@ export const ResturantCard = ({ resturant }: { resturant: Resturant }) => {
             {ratingArray.map((_num: any, index: number) => {
               return (
                 <SvgFromXml
-                  key={`res-rating-${index}`}
+                  key={`res-rating-${placeId}-${index}`}
                   xml={star}
                   width={20}
                   height={20}
@@ -67,6 +76,6 @@ export const ResturantCard = ({ resturant }: { resturant: Resturant }) => {
         </Row>
         <Address>{vicinity}</Address>
       </Info>
-    </ResturnatCard>
+    </RestaurnatCard>
   );
 };

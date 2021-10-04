@@ -18,11 +18,11 @@ export const Address = styled(Text)`
   color: ${(props) => props.theme.colors.ui.primary};
 `;
 
-export const ResturnatCard = styled(Card)`
+export const RestaurnatCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.ui.quaternary};
   margin-bottom: ${(props) => props.theme.space[3]};
 `;
-export const ResturnatCardCover = styled(Card.Cover)`
+export const RestaurnatCardCover = styled(Card.Cover)`
   padding: ${(props) => props.theme.space[3]};
   background-color: ${(props) => props.theme.colors.ui.primary};
 `;

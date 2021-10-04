@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Search } from "../components/search";
 import { ActivityIndicator } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
 import { FlatList } from "react-native";
-import { ResturantCard } from "../components/resturant-info-card.component";
+import { RestaurantCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
 import {
-  ResturantContext,
-  ResturantContextType,
-} from "../../../services/resturant/resturant.context";
+  RestaurantContext,
+  RestaurantContextType,
+} from "../../../services/restaurant/restaurant.context";
 
-const ResturantList = styled(FlatList).attrs({
+import { SCREEN_ROUTES } from "../../../infrastructure/navigation/restaurants";
+
+const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 16,
   },
@@ -26,10 +28,10 @@ const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
 
-export const ResturantScreen = () => {
+export const ResturantScreen = ({ navigation }: { navigation: any }) => {
   const { resturants, isLoading, error } = useContext(
-    ResturantContext
-  ) as ResturantContextType;
+    RestaurantContext
+  ) as RestaurantContextType;
 
   return (
     <>
@@ -44,11 +46,19 @@ export const ResturantScreen = () => {
         </LoadingContainer>
       )}
       <Search />
-      <ResturantList
+      <RestaurantList
         keyExtractor={(item: any, _index: number) => item.name}
         data={resturants}
         renderItem={({ item }: { item: any }) => (
-          <ResturantCard resturant={item} />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(SCREEN_ROUTES.Details, {
+                restaurant: item,
+              })
+            }
+          >
+            <RestaurantCard restaurant={item} />
+          </TouchableOpacity>
         )}
       />
     </>
