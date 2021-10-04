@@ -3,13 +3,13 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from "@react-navigation/stack";
-import { ResturantScreen } from "../../features/restaurants/screens/restaurants.screen";
+import { RestaurantScreen } from "../../features/restaurants/screens/restaurants.screen";
 import { RestaurantDetailScreen } from "../../features/restaurants/screens/restaurants-detail.screen";
 
 const RestaurantStack = createStackNavigator();
 
 export enum SCREEN_ROUTES {
-  Restaurants = "Main",
+  Restaurants = "Resturants",
   Details = "Details",
   Settings = "Settings",
 }
@@ -18,13 +18,12 @@ export const RestaurantsNavigator = () => {
   return (
     <RestaurantStack.Navigator
       screenOptions={{
-        headerShown: false,
         ...TransitionPresets.ModalPresentationIOS,
       }}
     >
       <RestaurantStack.Screen
         name={SCREEN_ROUTES.Restaurants}
-        component={ResturantScreen}
+        component={RestaurantScreen}
       />
       <RestaurantStack.Screen
         name={SCREEN_ROUTES.Details}

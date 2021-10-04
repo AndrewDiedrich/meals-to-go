@@ -43,6 +43,7 @@ const Map = () => {
 const options = {
   tabBarActiveTintColor: "tomato",
   tabBarInactiveTintColor: "gray",
+  headerShown: false,
 };
 
 const createScreenOptions = ({ route }: { route: Route }) => {

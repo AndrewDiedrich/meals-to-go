@@ -28,8 +28,8 @@ const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
 
-export const ResturantScreen = ({ navigation }: { navigation: any }) => {
-  const { resturants, isLoading, error } = useContext(
+export const RestaurantScreen = ({ navigation }: { navigation: any }) => {
+  const { restaurants, isLoading, error } = useContext(
     RestaurantContext
   ) as RestaurantContextType;
 
@@ -48,7 +48,7 @@ export const ResturantScreen = ({ navigation }: { navigation: any }) => {
       <Search />
       <RestaurantList
         keyExtractor={(item: any, _index: number) => item.name}
-        data={resturants}
+        data={restaurants}
         renderItem={({ item }: { item: any }) => (
           <TouchableOpacity
             onPress={() =>

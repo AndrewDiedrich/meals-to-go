@@ -21,7 +21,7 @@ import { SvgFromXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
-interface Resturant {
+interface Restaurant {
   name: string;
   icon: string;
   photos: string[];
@@ -32,7 +32,7 @@ interface Resturant {
   placeId: string;
 }
 
-export const RestaurantCard = ({ restaurant }: { restaurant: Resturant }) => {
+export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
   const {
     name,
     icon,

@@ -23,7 +23,7 @@ interface Response {
 /**
  *
  * @param location
- * request resturants based on long/lat location
+ * request restaurants based on long/lat location
  */
 export const restaurantRequest = async (
   location: string
