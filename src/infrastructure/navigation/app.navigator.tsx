@@ -6,7 +6,7 @@ import { Text } from "react-native";
 import { SafeArea } from "../../utils/safe-area-view";
 // Navigators
 import { RestaurantsNavigator } from "./restaurants";
-
+import { MapScreen } from "../../features/map/screens/map.screen";
 const Tab = createBottomTabNavigator();
 
 export enum ROUTES_NAMES {
@@ -32,13 +32,6 @@ const Settings = () => {
     </>
   );
 };
-const Map = () => {
-  return (
-    <>
-      <Text>Map</Text>
-    </>
-  );
-};
 
 const options = {
   tabBarActiveTintColor: "tomato",
@@ -61,7 +54,7 @@ export const AppNavigator = () => (
     <NavigationContainer>
       <Tab.Navigator screenOptions={createScreenOptions}>
         <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-        <Tab.Screen name="Map" component={Map} />
+        <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>

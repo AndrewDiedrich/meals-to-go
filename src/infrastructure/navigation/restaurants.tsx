@@ -8,7 +8,7 @@ import { RestaurantDetailScreen } from "../../features/restaurants/screens/resta
 
 const RestaurantStack = createStackNavigator();
 
-export enum SCREEN_ROUTES {
+export enum RESTAURANT_SCREEN_ROUTES {
   Restaurants = "Resturants",
   Details = "Details",
   Settings = "Settings",
@@ -22,11 +22,11 @@ export const RestaurantsNavigator = () => {
       }}
     >
       <RestaurantStack.Screen
-        name={SCREEN_ROUTES.Restaurants}
+        name={RESTAURANT_SCREEN_ROUTES.Restaurants}
         component={RestaurantScreen}
       />
       <RestaurantStack.Screen
-        name={SCREEN_ROUTES.Details}
+        name={RESTAURANT_SCREEN_ROUTES.Details}
         component={RestaurantDetailScreen}
       />
     </RestaurantStack.Navigator>

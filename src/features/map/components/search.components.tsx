@@ -6,16 +6,13 @@ import { LocationContext } from "../../../services/location/location.context";
 
 const SearchView = styled(View)`
   padding: 16px;
-  background-color: ${(props) => props.theme.colors.ui.quaternary};
+  position: absolute;
+  z-index: 999;
+  top: 40px;
+  width: 100%;
 `;
 
-export const Search = ({
-  isFavoritesToggled,
-  onFavoritesToggle,
-}: {
-  isFavoritesToggled: boolean;
-  onFavoritesToggle: () => void;
-}) => {
+export const Search = () => {
   const { search, keyword } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -26,8 +23,7 @@ export const Search = ({
   return (
     <SearchView>
       <Searchbar
-        icon={isFavoritesToggled ? "heart" : "heart-outline"}
-        onIconPress={onFavoritesToggle}
+        icon="map"
         placeholder="Search for a location"
         value={searchKeyword}
         onSubmitEditing={() => {

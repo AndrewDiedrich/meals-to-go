@@ -5,6 +5,7 @@ import { locationRequest } from "./locationRequest";
 interface Location {
   lat: string | undefined;
   lng: string | undefined;
+  viewport: any | undefined;
 }
 
 export interface LocationContextType {
@@ -15,7 +16,7 @@ export interface LocationContextType {
   keyword: string;
 }
 export const LocationContext = createContext({
-  location: { lat: undefined, lng: undefined },
+  location: { lat: 0, lng: 0, viewport: 0 },
   isLoading: false,
   error: null,
   search: (_searchKeyword: string) => {
@@ -24,7 +25,11 @@ export const LocationContext = createContext({
   keyword: "",
 });
 export const LocationContextProvider = ({ children }: { children: any }) => {
-  const [location, setLocation] = useState({ lat: undefined, lng: undefined });
+  const [location, setLocation] = useState<Location>({
+    lat: undefined,
+    lng: undefined,
+    viewport: undefined,
+  });
   const [keyword, setKeyword] = useState("San Francisco");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);

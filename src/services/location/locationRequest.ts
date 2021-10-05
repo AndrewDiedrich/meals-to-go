@@ -4,7 +4,7 @@ import camelize from "camelize";
 const locationTransform = (results: any) => {
   const { geometry } = camelize(results);
   const { lat, lng } = geometry.location;
-  return { lat, lng };
+  return { lat, lng, viewport: geometry.viewport };
 };
 
 interface Response {

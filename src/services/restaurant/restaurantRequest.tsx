@@ -35,7 +35,7 @@ export const restaurantRequest = async (
       throw new Error("No Mocks");
     }
     const transformed = restaurantsTransform(mock);
-    console;
+
     data = transformed;
   } catch (e: any) {
     requestError = e;

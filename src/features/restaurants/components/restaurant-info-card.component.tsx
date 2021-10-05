@@ -20,6 +20,7 @@ import {
 import { SvgFromXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import { Favorite } from "../../../components/favorites/favorite";
 
 interface Restaurant {
   name: string;
@@ -47,6 +48,7 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <RestaurnatCard elevation={5}>
+      <Favorite restaurant={restaurant} />
       <RestaurnatCardCover key={restaurant.name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant={Varient.LABEL}>{name}</Text>

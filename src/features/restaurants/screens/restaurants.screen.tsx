@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Search } from "../components/search";
 import { ActivityIndicator } from "react-native-paper";
@@ -10,8 +10,9 @@ import {
   RestaurantContext,
   RestaurantContextType,
 } from "../../../services/restaurant/restaurant.context";
-
-import { SCREEN_ROUTES } from "../../../infrastructure/navigation/restaurants";
+import { FavoritesContext } from "../../../services/favorites/favorites.context";
+import { RESTAURANT_SCREEN_ROUTES } from "../../../infrastructure/navigation/restaurants";
+import { FavoritesBar } from "../../../components/favorites/favorites-bar";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -29,9 +30,12 @@ const Loading = styled(ActivityIndicator)`
 `;
 
 export const RestaurantScreen = ({ navigation }: { navigation: any }) => {
+  const [isToggled, setIsToggled] = useState<boolean>(false);
+
   const { restaurants, isLoading, error } = useContext(
     RestaurantContext
   ) as RestaurantContextType;
+  const { favorites } = useContext(FavoritesContext);
 
   return (
     <>
@@ -40,19 +44,25 @@ export const RestaurantScreen = ({ navigation }: { navigation: any }) => {
           <Loading color={colors.ui.primary} animating={true} size={50} />
         </LoadingContainer>
       )}
-      {error && (
+      {/* {error && (
         <LoadingContainer>
           <Loading color={colors.ui.primary} animating={true} size={50} />
         </LoadingContainer>
+      )} */}
+      <Search
+        isFavoritesToggled={isToggled}
+        onFavoritesToggle={() => setIsToggled(!isToggled)}
+      />
+      {isToggled && (
+        <FavoritesBar favorites={favorites} onNavigate={navigation.navigate} />
       )}
-      <Search />
       <RestaurantList
         keyExtractor={(item: any, _index: number) => item.name}
         data={restaurants}
         renderItem={({ item }: { item: any }) => (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate(SCREEN_ROUTES.Details, {
+              navigation.navigate(RESTAURANT_SCREEN_ROUTES.Details, {
                 restaurant: item,
               })
             }
